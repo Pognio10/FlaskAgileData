@@ -41,7 +41,7 @@ def login():
     form = LoginForm(request.form)
     error = None
     if request.method == 'POST' and form.validate():
-        user = mongo.db.foodb.users.find_one({"username": form.username.data})
+        user = mongo.db.users.find_one({"username": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['username'])
             login_user(user_obj)
@@ -114,7 +114,6 @@ def product_edit(product_id):
 def product_delete(product_id):
     """Delete record using HTTP DELETE, respond with JSON."""
     result = mongo.db.products.delete_one({"_id": ObjectId(product_id)})
-    print("RESUNLT: {}".format(result.deleted_count))
     if result.deleted_count == 0:
         # Abort with Not Found, but with simple JSON response.
         response = jsonify({'status': 'Not Found'})
