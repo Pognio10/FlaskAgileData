@@ -10,9 +10,9 @@ from flask_login import login_user, logout_user
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-app.config['MONGO_DBNAME'] = 'cluster0'
-#app.config['MONGO_URI'] = 'mongodb://localhost:27017/foodb'
-app.config['MONGO_URI'] = 'mongodb+srv://admin:admin1!@cluster0-ehp73.mongodb.net/test?retryWrites=true&w=majority'
+app.config['MONGO_DBNAME'] = 'foodb'
+# app.config['MONGO_URI'] = 'mongodb://localhost:27017/foodb'
+app.config['MONGO_URI'] = 'mongodb+srv://admin:admin1@foodb-jxdvz.mongodb.net/test?retryWrites=true&w=majority'
 
 app.config['SECRET_KEY'] = 'sLgz46L6SAfy4MDtAxpdz1bKtO37H728'
 app.config['SESSION_PROTECTION'] = 'strong'
@@ -23,7 +23,6 @@ mongo = PyMongo(app)
 login_manager = LoginManager()
 login_manager.setup_app(app)
 login_manager.login_view = 'login'
-
 
 
 @login_manager.user_loader
@@ -37,13 +36,12 @@ def load_user(user_id):
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-
     if current_user.is_authenticated:
         return redirect(url_for('products_list'))
     form = LoginForm(request.form)
     error = None
     if request.method == 'POST' and form.validate():
-        user = mongo.db.foodb.users.find_one({"username": form.username.data})
+        user = mongo.db.users.find_one({"username": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['username'])
             login_user(user_obj)
@@ -62,7 +60,6 @@ def logout():
 
 @app.route('/')
 def index():
-    # return render_template('product/index.html')
     return redirect(url_for('products_list'))
 
 
@@ -124,8 +121,6 @@ def product_delete(product_id):
         response.status = 404
         return response
     return jsonify({'status': 'OK'})
-
-
 
 
 @app.route('/products/create/', methods=['GET', 'POST'])
