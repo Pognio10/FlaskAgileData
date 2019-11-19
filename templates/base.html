@@ -47,7 +47,7 @@
 </script>
 <div class="navbar navbar-static-top">
     <div class="navbar-inner">
-        <diadv class="container">
+        <div class="container">
             <a href="{{ url_for('products_list') }}" class="brand">Products</a>
             {% if current_user.is_authenticated %}
                 <ul class="nav">
@@ -68,11 +68,12 @@
                 </ul>
             {% endif %}
 
-        </diadv>
+        </div>
     </div>
 </div>
 <div class="content container">
     {% block main %}{% endblock main %}
+</div>
 </div>
 </body>
 </html>
