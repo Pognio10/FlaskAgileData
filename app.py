@@ -10,7 +10,7 @@ from flask_login import login_user, logout_user
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
-app.config['MONGO_DBNAME'] = 'foodb'
+app.config['MONGO_DBNAME'] = 'test'
 # app.config['MONGO_URI'] = 'mongodb://localhost:27017/foodb'
 app.config['MONGO_URI'] = 'mongodb+srv://admin:admin1@foodb-jxdvz.mongodb.net/test?retryWrites=true&w=majority'
 
@@ -41,7 +41,7 @@ def login():
     form = LoginForm(request.form)
     error = None
     if request.method == 'POST' and form.validate():
-        user = mongo.db.users.find_one({"username": form.username.data})
+        user = mongo.db.foodb.users.find_one({"username": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['username'])
             login_user(user_obj)
