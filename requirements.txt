@@ -5,3 +5,5 @@ Flask-PyMongo
 WTForms
 bson
 Jinja2
+dnspython
+gunicorn
