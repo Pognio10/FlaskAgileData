@@ -38,14 +38,12 @@ def load_user(user_id):
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
 
-    print("COLLECTION NAME: ", mongo.db.list_collection_names());
-
     if current_user.is_authenticated:
         return redirect(url_for('products_list'))
     form = LoginForm(request.form)
     error = None
     if request.method == 'POST' and form.validate():
-        user = mongo.db.users.find_one({"username": form.username.data})
+        user = mongo.db.foodb.users.find_one({"username": form.username.data})
         if user and User.validate_login(user['password'], form.password.data):
             user_obj = User(user['username'])
             login_user(user_obj)
