@@ -6,7 +6,7 @@
     <link href="https://netdna.bootstrapcdn.com/bootswatch/2.3.2/united/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"
           rel="stylesheet">
-   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/card.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/card.css') }}">
 
 
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -47,7 +47,7 @@
 </script>
 <div class="navbar navbar-static-top">
     <div class="navbar-inner">
-        <div class="container">
+        <diadv class="container">
             <a href="{{ url_for('products_list') }}" class="brand">Products</a>
             {% if current_user.is_authenticated %}
                 <ul class="nav">
@@ -68,33 +68,11 @@
                 </ul>
             {% endif %}
 
-        </div>
+        </diadv>
     </div>
 </div>
 <div class="content container">
     {% block main %}{% endblock main %}
 </div>
-</div>
 </body>
-
-{#<body>#}
-{##}
-
-{##}
-{##}
-{#<div class="navbar navbar-static-top">#}
-{#    <div class="navbar-inner">#}
-{#        <div class="container">#}
-{#            <a href="{{ url_for('products_list') }}" class="brand">Products</a>#}
-{#            <ul class="nav">#}
-{#                <li><a href="{{ url_for('product') }}">Create a new Product</a></li>#}
-{#            </ul>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{#<div class="content container">#}
-{#    {% block main %}{% endblock main %}#}
-{#</div>#}
-{#</div>#}
-{#</body>#}
 </html>
