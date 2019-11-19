@@ -37,6 +37,9 @@ def load_user(user_id):
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+
+    print("COLLECTION NAME: ", mongo.db.list_collection_names());
+
     if current_user.is_authenticated:
         return redirect(url_for('products_list'))
     form = LoginForm(request.form)
