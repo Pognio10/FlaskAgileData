@@ -8,7 +8,7 @@ from fooApp.models import User
 from flask_login import LoginManager, current_user, login_required
 from flask_login import login_user, logout_user
 
-app = Flask(__name__, template_folder='../templates', static_folder='../static')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 
 app.config['MONGO_DBNAME'] = 'foodb'
 #app.config['MONGO_URI'] = 'mongodb://localhost:27017/foodb'
